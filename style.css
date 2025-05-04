@@ -1,0 +1,282 @@
+/* ========= TW Garage - style.css (ฉบับสมบูรณ์ที่สุด) ========= */
+
+/* ---------- 1. ตัวแปร CSS :root ใช้แทนค่าสี / ขนาด ---------- */
+:root {
+  --main-red: #ff3333; /* สีแดงหลัก */
+  --hover-red: #ff5555; /* สีแดงตอน hover */
+  --bg-dark: #121212; /* พื้นหลังเข้ม */
+  --light-text: #ffffff; /* ข้อความสีอ่อน */
+  --muted-text: #aaa; /* ข้อความรอง */
+  --shadow-yellow: rgba(255, 255, 0, 0.3); /* เงาเหลือง */
+  --card-radius: 12px; /* มุมโค้งของกล่อง */
+  --main-font: 'Prompt', sans-serif; /* ฟอนต์หลัก */
+  --font-size-base: 1em; /* ขนาดฟอนต์มาตรฐาน */
+  --max-width: 1200px; /* ขนาดกว้างสูงสุดของเนื้อหา */
+}
+
+/* ---------- 2. พื้นฐานของ body ---------- */
+body {
+  margin: 0;
+  font-family: var(--main-font); /* ใช้ฟอนต์จากตัวแปร */
+  background-color: var(--bg-dark);
+  color: var(--light-text);
+  overflow-x: hidden;
+  scroll-behavior: smooth; /* เลื่อนเนียน ๆ */
+}
+
+/* ---------- 3. เมนูด้านบนแบบ Sticky ---------- */
+.navbar {
+  background-color: #1e1e1e;
+  padding: 12px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(255, 0, 0, 0.3);
+}
+
+.navbar a {
+  color: var(--light-text);
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+  color: var(--hover-red); /* เปลี่ยนสีเมื่อ hover */
+}
+
+/* ---------- 4. Hero Section ---------- */
+.hero {
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  height: 60vh; /* สำหรับเดสก์ท็อป */
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: 40vh; /* ปรับเฉพาะมือถือ */
+  }
+}
+
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(85%) contrast(105%) drop-shadow(0 0 10px var(--main-red));
+  animation: fadein 1.5s ease-out;
+}
+
+.hero-overlay {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(30,30,30,0.9));
+  padding: 20px;
+  border-radius: var(--card-radius);
+  max-width: 800px;
+  animation: zoomCenter3D 1s ease-out;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+/* ---------- แอนิเมชัน 3D ---------- */
+@keyframes zoomCenter3D {
+  0% {
+    opacity: 0;
+    transform: perspective(800px) scale(0.8) rotateX(-10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(800px) scale(1) rotateX(0deg);
+  }
+}
+
+/* ---------- 5. ปุ่มต่าง ๆ ---------- */
+.button {
+  display: block;
+  background-color: var(--main-red);
+  color: var(--light-text);
+  padding: 14px 20px;
+  margin: 10px auto;
+  text-decoration: none;
+  border-radius: var(--card-radius);
+  max-width: 300px;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px var(--shadow-yellow);
+}
+
+.button:hover {
+  box-shadow: 0 8px 16px rgba(255, 0, 0, 0.6);
+  transform: translateY(-4px);
+}
+
+/* ---------- 6. คำอธิบายกลางหน้า ---------- */
+.description {
+  padding: 30px 20px;
+  max-width: var(--max-width);
+  margin: auto;
+  text-align: center;
+}
+
+/* ---------- 7. หัวข้อหลัก ---------- */
+.section-header,
+h2 {
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+  margin: 40px auto 20px;
+  text-shadow: 0 0 10px red;
+  color: var(--light-text);
+}
+
+/* ---------- 8. แกลเลอรีบริการ ---------- */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  padding: 20px;
+}
+
+.service {
+  background-color: #1e1e1e;
+  padding: 10px;
+  border-radius: var(--card-radius);
+  text-align: center;
+  width: 45%;
+  box-shadow: 0 4px 10px rgba(255, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(255, 255, 0, 0.5);
+}
+
+.service img {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  border-radius: var(--card-radius);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.service img:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 8px yellow);
+}
+
+.service p {
+  margin-top: 10px;
+  font-size: 1em;
+  color: #ddd;
+}
+
+/* ---------- 9. อัตราค่าบริการ ---------- */
+#pricing img {
+  width: 50vw;
+  max-width: 500px;
+  height: auto;
+  border-radius: var(--card-radius);
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(255, 0, 0, 0.3);
+}
+
+/* ---------- 10. ส่วนท้าย ---------- */
+footer {
+  padding: 20px;
+  color: var(--muted-text);
+  font-size: 0.9em;
+  text-align: center;
+  background: #1e1e1e;
+  box-shadow: 0 -2px 10px rgba(255, 0, 0, 0.3);
+}
+
+/* ---------- 11. แอนิเมชัน ---------- */
+@keyframes fadein {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideup {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- 12. รองรับหน้าจอเล็ก (มือถือ) ---------- */
+@media (max-width: 768px) {
+  .service {
+    width: 90%; /* เพิ่มขนาดของบริการเมื่อหน้าจอเล็กลง */
+  }
+
+  #pricing img {
+    width: 90vw; /* ปรับขนาดภาพเมื่อหน้าจอเล็ก */
+  }
+
+  .hero-overlay {
+    padding: 15px;
+    font-size: 0.95em;
+  }
+
+  .button {
+    max-width: 90%;
+  }
+}
+
+/* ---------- 13. รองรับ Dark Mode (Automatic Theme) ---------- */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: var(--bg-dark);
+    color: var(--light-text);
+  }
+
+  .navbar, .service, footer {
+    background-color: #1e1e1e;
+    color: var(--light-text);
+  }
+
+  .hero-overlay {
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  .button {
+    background-color: var(--main-red);
+    color: var(--light-text);
+  }
+}
+
+/* ---------- 1. ตำแหน่งล้อ ---------- */
+.wheel-container {
+  position: fixed;
+  bottom: 7px;
+  right: 7px;
+  z-index: 999;
+}
+
+.wheel {
+  width: 70px;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  will-change: transform;
+  border: none;
+  box-shadow: none;
+}
+
+/* หมุนล้อ */
+@keyframes rotateWheel {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
